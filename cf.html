@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Menu</title>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+    .menu-container {
+      border: 3px solid #c4903d;
+      border-radius: 20px;
+      width: 60%;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+    }
+    h1 {
+      text-align: center;
+      font-size: 60px;
+      margin-bottom: 40px;
+      color: #222;
+    }
+    table {
+      width: 100%;
+      background-color: #2e2f34;
+      color: white;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    th {
+      color: #f1a34b;
+      font-size: 20px;
+      text-align: center;
+      padding: 12px;
+    }
+    td {
+      text-align: center;
+      padding: 10px;
+      font-size: 18px;
+    }
+    input[type="number"] {
+      width: 200px;
+      text-align: left;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      padding: 5px;
+      font-size: 16px;
+    }
+    .total-box {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .total-box span {
+      background-color: #f1a34b;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 22px;
+      color: black;
+      font-weight: bold;
+    }
+    .btn-box {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .btn-box button {
+      background-color: #d19753;
+      border: none;
+      color: black;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-box button:hover {
+      background-color: #b57e36;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-container">
+    <h1>Coffee Menu</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Sr #</th>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>🍃 Cardamom Tea</td>
+          <td>Rs: 100/-</td>
+          <td><input type="number" id="q1" min="0" value="0"></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>🧊 Iced Tea</td>
+          <td>Rs: 150/-</td>
+          <td><input type="number" id="q2" min="0" value="0"></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>☕ Latte</td>
+          <td>Rs: 200/-</td>
+          <td><input type="number" id="q3" min="0" value="0"></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>🥤 Cappuccino</td>
+          <td>Rs: 250/-</td>
+          <td><input type="number" id="q4" min="0" value="0"></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>🍮 Espresso</td>
+          <td>Rs: 300/-</td>
+          <td><input type="number" id="q5" min="0" value="0"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="total-box">
+      <span>Total Cost: (Rs) = <span id="total">0</span> /-</span>
+    </div>
+
+    <div class="btn-box">
+      <button onclick="submitOrder()">Submit Order</button>
+      <button onclick="clearForm()">Clear Order Form</button>
+    </div>
+  </div>
+
+  <script>
+
+    const prices = [100, 150, 200, 250, 300];
+    const inputs = document.querySelectorAll('input[type="number"]');
+    const totalDisplay = document.getElementById('total');
+
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        calculateTotal();
+      });
+    });
+
+    function calculateTotal() {
+      let total = 0;
+      inputs.forEach((input, i) => {
+        const quantity = parseInt(input.value) || 0;
+        total += quantity * prices[i];
+      });
+      totalDisplay.textContent = total;
+    }
+
+    function submitOrder() {
+      alert("Your order has been submitted! ☕");
+    }
+
+    function clearForm() {
+      inputs.forEach(input => input.value = 0);
+      calculateTotal();
+    }
+  </script>
+
+</body>
+</html>
